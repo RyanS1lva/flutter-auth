@@ -5,12 +5,22 @@ import '../../lib.dart';
 class TextFieldWidget extends StatelessWidget {
   final String? label;
   final String? hint;
+  final bool? obscureText;
+  final TextInputType? keyboardType;
 
-  const TextFieldWidget({this.label, this.hint, super.key});
+  const TextFieldWidget({
+    this.label,
+    this.hint,
+    this.obscureText,
+    this.keyboardType,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      obscureText: obscureText ?? false,
+      keyboardType: keyboardType ?? TextInputType.text,
       decoration: InputDecoration(
         label: Text(label ?? ''),
         hint: Text(hint ?? ''),

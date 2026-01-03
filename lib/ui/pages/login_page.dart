@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../lib.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +24,19 @@ class LoginPage extends StatelessWidget {
             children: <Widget>[
               TitleWidget(title: 'Login'),
               const SizedBox(height: AppSizes.xxl),
-              TextFieldWidget(label: 'E-mail'),
-              const SizedBox(height: AppSizes.md),
-              TextFieldWidget(label: 'Senha'),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    TextFieldWidget(
+                      label: 'E-mail',
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    const SizedBox(height: AppSizes.md),
+                    TextFieldWidget(label: 'Senha', obscureText: true),
+                  ],
+                ),
+              ),
               const SizedBox(height: AppSizes.lg),
               SizedBox(
                 height: AppSizes.buttonHeight,
@@ -42,7 +59,18 @@ class LoginPage extends StatelessWidget {
                     Navigator.pushNamed(context, AppRoutes.register),
                 style: TextButton.styleFrom(alignment: Alignment.center),
                 child: Text(
-                  'registrar-se',
+                  'Registrar-se',
+                  style: TextStyle(
+                    color: AppColors.textSecondary,
+                    fontSize: AppSizes.md,
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {},
+                style: TextButton.styleFrom(alignment: Alignment.center),
+                child: Text(
+                  'Esqueci minha senha',
                   style: TextStyle(
                     color: AppColors.textSecondary,
                     fontSize: AppSizes.md,

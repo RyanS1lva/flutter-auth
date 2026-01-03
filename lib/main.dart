@@ -29,6 +29,12 @@ class App extends StatelessWidget {
             elevation: 0,
           ),
         ),
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+            overlayColor: WidgetStateProperty.all(Colors.transparent),
+            splashFactory: NoSplash.splashFactory,
+          ),
+        ),
       ),
       initialRoute: AppRoutes.login,
       routes: AppRoutes.getAll(),

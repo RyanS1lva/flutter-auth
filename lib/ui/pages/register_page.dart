@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 
 import '../../lib.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +24,26 @@ class RegisterPage extends StatelessWidget {
             children: <Widget>[
               TitleWidget(title: 'Registrar-se'),
               SizedBox(height: AppSizes.xxl),
-              TextFieldWidget(label: 'Nome completo'),
-              SizedBox(height: AppSizes.md),
-              TextFieldWidget(label: 'E-mail'),
-              SizedBox(height: AppSizes.md),
-              TextFieldWidget(label: 'Senha'),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    TextFieldWidget(label: 'Nome completo'),
+                    SizedBox(height: AppSizes.md),
+                    TextFieldWidget(
+                      label: 'E-mail',
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    SizedBox(height: AppSizes.md),
+                    TextFieldWidget(label: 'Senha', obscureText: true),
+                    SizedBox(height: AppSizes.md),
+                    TextFieldWidget(
+                      label: 'Confirmar senha',
+                      obscureText: true,
+                    ),
+                  ],
+                ),
+              ),
               SizedBox(height: AppSizes.lg),
               SizedBox(
                 height: AppSizes.buttonHeight,
