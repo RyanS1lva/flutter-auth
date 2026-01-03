@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../lib.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatelessWidget {
+  const RegisterPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,15 +12,18 @@ class LoginPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(AppSizes.md),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TitleWidget(title: 'Login'),
-              const SizedBox(height: AppSizes.xxl),
-              TextFieldWidget(label: 'e-mail'),
-              const SizedBox(height: AppSizes.md),
-              TextFieldWidget(label: 'senha'),
-              const SizedBox(height: AppSizes.lg),
+              TitleWidget(title: 'Registrar-se'),
+              SizedBox(height: AppSizes.xxl),
+              TextFieldWidget(label: 'Nome completo'),
+              SizedBox(height: AppSizes.md),
+              TextFieldWidget(label: 'E-mail'),
+              SizedBox(height: AppSizes.md),
+              TextFieldWidget(label: 'Senha'),
+              SizedBox(height: AppSizes.md),
+              SizedBox(height: AppSizes.lg),
               SizedBox(
                 height: AppSizes.buttonHeight,
                 width: double.infinity,
@@ -29,20 +32,19 @@ class LoginPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      Text('Acessar'),
+                      Text('Registrar'),
                       const SizedBox(width: AppSizes.md),
-                      Icon(Icons.login),
+                      Icon(Icons.app_registration),
                     ],
                   ),
                 ),
               ),
               const SizedBox(height: AppSizes.sm),
               TextButton(
-                onPressed: () =>
-                    Navigator.pushNamed(context, AppRoutes.register),
+                onPressed: () => Navigator.pushNamed(context, AppRoutes.login),
                 style: TextButton.styleFrom(alignment: Alignment.center),
                 child: Text(
-                  'registrar-se',
+                  'Já possuo uma conta',
                   style: TextStyle(
                     color: AppColors.textSecondary,
                     fontSize: AppSizes.md,
