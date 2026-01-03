@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 import 'lib.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: ".env");
+
+  await Supabase.initialize(
+    url: dotenv.env['SUPABASE_URL'] ?? '',
+    anonKey: dotenv.env['SUPABASE_ANON_KEY'] ?? '',
+  );
+
   runApp(const App());
 }
 
@@ -14,28 +26,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'AuthApp',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: AppColorScheme.light,
-        scaffoldBackgroundColor: AppColorScheme.light.surface,
-        appBarTheme: AppBarTheme(
-          backgroundColor: AppColorScheme.light.primary,
-          foregroundColor: AppColorScheme.light.onPrimary,
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColorScheme.light.primary,
-            foregroundColor: AppColorScheme.light.onPrimary,
-            textStyle: TextStyle(fontSize: AppSizes.md),
-            elevation: 0,
-          ),
-        ),
-        textButtonTheme: TextButtonThemeData(
-          style: ButtonStyle(
-            overlayColor: WidgetStateProperty.all(Colors.transparent),
-            splashFactory: NoSplash.splashFactory,
-          ),
-        ),
-      ),
+      theme: lightTheme,
       initialRoute: AppRoutes.login,
       routes: AppRoutes.getAll(),
     );
