@@ -22,7 +22,6 @@ class RegisterPage extends StatelessWidget {
               TextFieldWidget(label: 'E-mail'),
               SizedBox(height: AppSizes.md),
               TextFieldWidget(label: 'Senha'),
-              SizedBox(height: AppSizes.md),
               SizedBox(height: AppSizes.lg),
               SizedBox(
                 height: AppSizes.buttonHeight,
