@@ -21,7 +21,17 @@ class App extends StatelessWidget {
           backgroundColor: AppColorScheme.light.primary,
           foregroundColor: AppColorScheme.light.onPrimary,
         ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColorScheme.light.primary,
+            foregroundColor: AppColorScheme.light.onPrimary,
+            textStyle: TextStyle(fontSize: AppSizes.md),
+            elevation: 0,
+          ),
+        ),
       ),
+      initialRoute: AppRoutes.login,
+      routes: AppRoutes.getAll(),
     );
   }
 }

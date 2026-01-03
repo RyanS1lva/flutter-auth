@@ -7,11 +7,57 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(AppSizes.md),
-          child: Placeholder(),
+          padding: const EdgeInsets.all(AppSizes.md),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Text(
+                'Login',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: AppSizes.xl,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+              ),
+              const SizedBox(height: AppSizes.xxl),
+              TextFieldWidget(label: 'e-mail'),
+              const SizedBox(height: AppSizes.md),
+              TextFieldWidget(label: 'senha'),
+              const SizedBox(height: AppSizes.lg),
+              SizedBox(
+                height: AppSizes.buttonHeight,
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text('Acessar'),
+                      const SizedBox(width: AppSizes.md),
+                      Icon(Icons.login),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: AppSizes.sm),
+              TextButton(
+                onPressed: () {},
+                style: TextButton.styleFrom(alignment: Alignment.center),
+                child: Text(
+                  'registrar-se',
+                  style: TextStyle(
+                    color: AppColors.textSecondary,
+                    fontSize: AppSizes.md,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

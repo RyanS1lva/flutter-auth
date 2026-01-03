@@ -16,5 +16,7 @@ class AppColorScheme {
 
     surface: Colors.white,
     onSurface: AppColors.textPrimary,
+
+    outline: AppColors.border,
   );
 }

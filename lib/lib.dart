@@ -1,2 +1,2 @@
-export './ui/ui.dart';
+export 'ui/ui.dart';
 export 'core/core.dart';
