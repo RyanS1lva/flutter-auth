@@ -17,9 +17,9 @@ class LoginPage extends StatelessWidget {
             children: <Widget>[
               TitleWidget(title: 'Login'),
               const SizedBox(height: AppSizes.xxl),
-              TextFieldWidget(label: 'e-mail'),
+              TextFieldWidget(label: 'E-mail'),
               const SizedBox(height: AppSizes.md),
-              TextFieldWidget(label: 'senha'),
+              TextFieldWidget(label: 'Senha'),
               const SizedBox(height: AppSizes.lg),
               SizedBox(
                 height: AppSizes.buttonHeight,
