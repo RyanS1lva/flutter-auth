@@ -41,7 +41,8 @@ class RegisterPage extends StatelessWidget {
               ),
               const SizedBox(height: AppSizes.sm),
               TextButton(
-                onPressed: () => Navigator.pushNamed(context, AppRoutes.login),
+                onPressed: () =>
+                    Navigator.pushReplacementNamed(context, AppRoutes.login),
                 style: TextButton.styleFrom(alignment: Alignment.center),
                 child: Text(
                   'Já possuo uma conta',
