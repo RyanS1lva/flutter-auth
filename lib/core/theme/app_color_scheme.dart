@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
+
+import '../../lib.dart';
 
 class AppColorScheme {
   static const ColorScheme light = ColorScheme(
