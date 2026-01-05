@@ -1,10 +1,11 @@
+import 'package:core/lib.dart';
 import 'package:flutter/material.dart';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-import 'lib.dart';
+import 'package:flutter_auth/features/auth/lib/auth_feature.dart';
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -30,8 +31,8 @@ class App extends StatelessWidget {
       title: 'AuthApp',
       debugShowCheckedModeBanner: false,
       theme: lightTheme,
-      initialRoute: AppRoutes.login,
-      routes: AppRoutes.getAll(),
+      initialRoute: AuthFeature.login,
+      routes: AuthFeature.routes(),
     );
   }
 }

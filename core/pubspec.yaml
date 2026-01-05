@@ -1,0 +1,12 @@
+name: core
+description: Core utilities package for flutter_auth
+publish_to: "none"
+version: 0.0.1
+
+environment:
+  sdk: ">=3.10.4 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1

@@ -1,21 +1,20 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-abstract class IUsersRepository {
-  Future<void> registerUser({
+abstract class IUserRepository {
+  Future<void> register({
     required String fullname,
     required String email,
     required String password,
   });
 }
 
-final class UsersRepository implements IUsersRepository {
+class UserRepository implements IUserRepository {
   final SupabaseClient _client;
 
-  UsersRepository({SupabaseClient? client})
-    : _client = client ?? Supabase.instance.client;
+  UserRepository(this._client);
 
   @override
-  Future<void> registerUser({
+  Future<void> register({
     required String fullname,
     required String email,
     required String password,
@@ -24,12 +23,12 @@ final class UsersRepository implements IUsersRepository {
       await _client.auth.signUp(
         email: email,
         password: password,
-        data: {'fullname': fullname},
+        data: {fullname: fullname},
       );
     } on AuthException catch (e) {
       throw Exception(e.message);
     } catch (e) {
-      throw Exception('Erro inesperado ao criar conta.');
+      throw Exception('Erro ao registrar: $e');
     }
   }
 }

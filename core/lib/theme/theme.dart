@@ -4,7 +4,7 @@ export 'app_sizes.dart';
 
 import 'package:flutter/material.dart';
 
-import '../../../lib.dart';
+import 'package:core/lib.dart';
 
 final ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(
   style: ElevatedButton.styleFrom(

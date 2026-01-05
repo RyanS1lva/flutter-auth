@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-import '../../../../lib.dart';
+import 'package:core/lib.dart';
+
+import '../../lib.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -66,7 +67,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: AppSizes.sm),
                   TextButton(
                     onPressed: () =>
-                        Navigator.pushNamed(context, AppRoutes.register),
+                        Navigator.pushNamed(context, AuthFeature.register),
                     style: TextButton.styleFrom(alignment: Alignment.center),
                     child: Text(
                       'Registrar-se',

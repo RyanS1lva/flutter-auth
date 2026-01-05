@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../lib.dart';
+import 'package:core/lib.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
   final String? label;

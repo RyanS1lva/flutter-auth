@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../lib.dart';
+import 'package:core/lib.dart';
+
+import '../../lib.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -15,6 +17,7 @@ class _RegisterPageState extends State<RegisterPage> with FormValidatorMixin {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  late final RegisterCubit _cubit;
 
   @override
   void initState() {
@@ -109,7 +112,7 @@ class _RegisterPageState extends State<RegisterPage> with FormValidatorMixin {
                   TextButton(
                     onPressed: () => Navigator.pushReplacementNamed(
                       context,
-                      AppRoutes.login,
+                      AuthFeature.login,
                     ),
                     style: TextButton.styleFrom(alignment: Alignment.center),
                     child: Text(
