@@ -8,7 +8,7 @@ mixin FormValidatorMixin {
   }
 
   String? isEmail(String? value) {
-    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}\$');
+    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$');
 
     if (value == null || !emailRegex.hasMatch(value)) {
       return 'Insira um e-mail válido.';

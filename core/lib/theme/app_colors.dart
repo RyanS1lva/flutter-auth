@@ -12,4 +12,6 @@ class AppColors {
   static const Color textDisabled = Color(0xFFBDBDBD);
 
   static const Color border = Color(0xFFBDBDBD);
+
+  static const Color error = Color(0XFFFF3333);
 }

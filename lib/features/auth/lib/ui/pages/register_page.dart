@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:core/lib.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../lib.dart';
 
@@ -22,6 +24,7 @@ class _RegisterPageState extends State<RegisterPage> with FormValidatorMixin {
   @override
   void initState() {
     super.initState();
+    _cubit = GetIt.I.get();
   }
 
   @override
@@ -33,6 +36,18 @@ class _RegisterPageState extends State<RegisterPage> with FormValidatorMixin {
     super.dispose();
   }
 
+  void _onRegisterPressed() async {
+    FocusScope.of(context).unfocus();
+
+    if (_formKey.currentState!.validate()) {
+      await _cubit.register(
+        fullname: _nameController.text,
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,89 +56,111 @@ class _RegisterPageState extends State<RegisterPage> with FormValidatorMixin {
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(AppSizes.md),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  TitleWidget(title: 'Registrar-se'),
-                  SizedBox(height: AppSizes.xxl),
-                  Form(
-                    key: _formKey,
-                    child: Column(
-                      children: <Widget>[
-                        TextFormFieldWidget(
-                          label: 'Nome completo',
-                          controller: _nameController,
-                          validator: isNotEmpty,
-                        ),
-                        SizedBox(height: AppSizes.md),
-                        TextFormFieldWidget(
-                          label: 'E-mail',
-                          keyboardType: TextInputType.emailAddress,
-                          controller: _emailController,
-                          validator: (value) => combine([
-                            () => isNotEmpty(value),
-                            () => isEmail(value),
-                          ]),
-                        ),
-                        SizedBox(height: AppSizes.md),
-                        TextFormFieldWidget(
-                          label: 'Senha',
-                          obscureText: true,
-                          controller: _passwordController,
-                          validator: (value) => combine([
-                            () => isNotEmpty(value),
-                            () => hasMinChars(value, 8),
-                          ]),
-                        ),
-                        SizedBox(height: AppSizes.md),
-                        TextFormFieldWidget(
-                          label: 'Confirmar senha',
-                          obscureText: true,
-                          controller: _confirmPasswordController,
-                          validator: (value) => hasEqualPasswords(
-                            value,
-                            _passwordController.text,
-                          ),
-                          textInputAction: TextInputAction.done,
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: AppSizes.lg),
-                  SizedBox(
-                    height: AppSizes.buttonHeight,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        _formKey.currentState!.validate();
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text('Registrar'),
-                          const SizedBox(width: AppSizes.md),
-                          Icon(Icons.app_registration),
-                        ],
+              child: BlocConsumer<RegisterCubit, RegisterState>(
+                bloc: _cubit,
+                listener: (context, state) {
+                  if (state is RegisterError) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(state.message),
+                        backgroundColor: AppColors.error,
                       ),
-                    ),
-                  ),
-                  const SizedBox(height: AppSizes.sm),
-                  TextButton(
-                    onPressed: () => Navigator.pushReplacementNamed(
+                    );
+                  } else if (state is RegisterSuccess) {
+                    Navigator.pushReplacementNamed(
                       context,
-                      AuthFeature.login,
-                    ),
-                    style: TextButton.styleFrom(alignment: Alignment.center),
-                    child: Text(
-                      'Já possuo uma conta',
-                      style: TextStyle(
-                        color: AppColors.textSecondary,
-                        fontSize: AppSizes.md,
+                      AuthFeature.dashboard,
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      TitleWidget(title: 'Registrar-se'),
+                      SizedBox(height: AppSizes.xxl),
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          children: <Widget>[
+                            TextFormFieldWidget(
+                              label: 'Nome completo',
+                              controller: _nameController,
+                              validator: isNotEmpty,
+                            ),
+                            SizedBox(height: AppSizes.md),
+                            TextFormFieldWidget(
+                              label: 'E-mail',
+                              keyboardType: TextInputType.emailAddress,
+                              controller: _emailController,
+                              validator: (value) => combine([
+                                () => isNotEmpty(value),
+                                () => isEmail(value),
+                              ]),
+                            ),
+                            SizedBox(height: AppSizes.md),
+                            TextFormFieldWidget(
+                              label: 'Senha',
+                              obscureText: true,
+                              controller: _passwordController,
+                              validator: (value) => combine([
+                                () => isNotEmpty(value),
+                                () => hasMinChars(value, 8),
+                              ]),
+                            ),
+                            SizedBox(height: AppSizes.md),
+                            TextFormFieldWidget(
+                              label: 'Confirmar senha',
+                              obscureText: true,
+                              controller: _confirmPasswordController,
+                              validator: (value) => hasEqualPasswords(
+                                value,
+                                _passwordController.text,
+                              ),
+                              textInputAction: TextInputAction.done,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-                ],
+                      SizedBox(height: AppSizes.lg),
+                      SizedBox(
+                        height: AppSizes.buttonHeight,
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          onPressed: state is RegisterLoading
+                              ? null
+                              : _onRegisterPressed,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text('Registrar'),
+                              const SizedBox(width: AppSizes.md),
+                              Icon(Icons.app_registration),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: AppSizes.sm),
+                      TextButton(
+                        onPressed: () => Navigator.pushReplacementNamed(
+                          context,
+                          AuthFeature.login,
+                        ),
+                        style: TextButton.styleFrom(
+                          alignment: Alignment.center,
+                        ),
+                        child: Text(
+                          'Já possuo uma conta',
+                          style: TextStyle(
+                            color: AppColors.textSecondary,
+                            fontSize: AppSizes.md,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
           ),

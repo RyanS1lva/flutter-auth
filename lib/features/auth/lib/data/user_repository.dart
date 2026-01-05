@@ -2,7 +2,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 abstract class IUserRepository {
   Future<void> register({
-    required String fullname,
+    required String fullName,
     required String email,
     required String password,
   });
@@ -15,7 +15,7 @@ class UserRepository implements IUserRepository {
 
   @override
   Future<void> register({
-    required String fullname,
+    required String fullName,
     required String email,
     required String password,
   }) async {
@@ -23,7 +23,7 @@ class UserRepository implements IUserRepository {
       await _client.auth.signUp(
         email: email,
         password: password,
-        data: {fullname: fullname},
+        data: {'full_name': fullName},
       );
     } on AuthException catch (e) {
       throw Exception(e.message);

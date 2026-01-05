@@ -8,10 +8,12 @@ part 'register_state.dart';
 class RegisterCubit extends Cubit<RegisterState> with SafeCubit<RegisterState> {
   final IUserRepository _repository;
 
-  RegisterCubit(this._repository) : super(RegisterInitial());
+  RegisterCubit({required IUserRepository repository})
+    : _repository = repository,
+      super(RegisterInitial());
 
-  Future<void> registerUser({
-    required String fullname,
+  Future<void> register({
+    required String fullName,
     required String email,
     required String password,
   }) async {
@@ -19,7 +21,7 @@ class RegisterCubit extends Cubit<RegisterState> with SafeCubit<RegisterState> {
 
     try {
       await _repository.register(
-        fullname: fullname,
+        fullName: fullName,
         email: email,
         password: password,
       );
