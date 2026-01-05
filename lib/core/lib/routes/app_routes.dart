@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../lib.dart';
+import '../../../lib.dart';
 
 class AppRoutes {
   static const String login = '/';

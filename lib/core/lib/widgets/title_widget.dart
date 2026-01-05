@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../lib.dart';
+import '../../../lib.dart';
 
 class TitleWidget extends StatelessWidget {
   final String title;
