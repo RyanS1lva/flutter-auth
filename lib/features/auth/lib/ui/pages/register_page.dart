@@ -41,7 +41,7 @@ class _RegisterPageState extends State<RegisterPage> with FormValidatorMixin {
 
     if (_formKey.currentState!.validate()) {
       await _cubit.register(
-        fullname: _nameController.text,
+        fullName: _nameController.text,
         email: _emailController.text,
         password: _passwordController.text,
       );
